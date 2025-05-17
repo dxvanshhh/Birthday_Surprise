@@ -1,0 +1,79 @@
+body {
+  margin: 0;
+  padding: 0;
+  font-family: "Comic Sans MS", cursive, sans-serif;
+  background: linear-gradient(135deg, #ffccff, #ffe6e6);
+  overflow-x: hidden;
+  position: relative;
+}
+
+.container {
+  max-width: 700px;
+  margin: 80px auto;
+  text-align: center;
+  background: white;
+  padding: 30px;
+  border-radius: 20px;
+  box-shadow: 0 0 25px rgba(255, 100, 150, 0.5);
+}
+
+h1 {
+  font-size: 2.5rem;
+  color: #ff3399;
+  margin-bottom: 20px;
+}
+
+.message {
+  white-space: pre-line;
+  font-size: 1.1rem;
+  color: #333;
+  text-align: left;
+  padding: 10px;
+  line-height: 1.6;
+}
+
+button {
+  margin-top: 20px;
+  padding: 10px 25px;
+  font-size: 1rem;
+  background-color: #ff66b2;
+  color: white;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  box-shadow: 0 4px 6px rgba(255, 105, 180, 0.3);
+}
+
+button:hover {
+  background-color: #ff3399;
+}
+
+.heart {
+  position: fixed;
+  bottom: 0;
+  width: 20px;
+  height: 20px;
+  background: url('https://upload.wikimedia.org/wikipedia/commons/thumb/4/42/Love_Heart_symbol.svg/2048px-Love_Heart_symbol.svg.png');
+  background-size: contain;
+  background-repeat: no-repeat;
+  animation: float 4s linear infinite;
+  z-index: 999;
+}
+
+@keyframes float {
+  0% {
+    transform: translateY(0) rotate(0);
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(-100vh) rotate(360deg);
+    opacity: 0;
+  }
+}
+
+canvas {
+  position: fixed;
+  top: 0;
+  left: 0;
+  pointer-events: none;
+}

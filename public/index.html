@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Happy Birthday Sachi🦋🎀</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <audio id="bg-music" src="music.mp3" preload="auto"></audio>
+
+  <div class="container">
+    <h1>Happy Birthday, Sachi!🦋🎀</h1>
+    <div id="message" class="message"></div>
+    <button onclick="showSurprise()">Click for a Surprise!</button>
+  </div>
+
+  <canvas id="confetti-canvas"></canvas>
+
+  <script>
+    const music = document.getElementById('bg-music');
+    const messageText = `
+From the first moment we started talking, everything felt like a movie, and you became the main character in the story I never want to end.
+
+You are literally the cutest, kindest, and most special girl I’ve ever met. It’s your first birthday in love, and I feel so lucky to be the one wishing you with all my heart 💌
+
+This page isn’t just code, it’s filled with all my feelings for you. I know it’s not perfect, but it’s made with so much love and care, just like you deserve.
+
+I can’t believe how lucky I am to have you in my life. You’re the reason I smile every day. You’re my sunshine, my happiness, and my everything.
+
+Today is all about YOU — your cuteness, your smile, and your laugh that melts my heart. I feel so lucky to be the first guy to be part of your first love story. You're the prettiest little chaos in my calm world, and I wouldn’t want it any other way.
+
+From all our silly convos to your cute rants, you’ve become my favorite part of every single day. I love how you make me laugh, how you care for me, and how you always know what to say to make everything better. You’re my best friend and the love of my life.
+
+You deserve all the happiness in the world, and I promise to do my best to give it to you.
+
+I know we’re still figuring things out, but I want you to know that I’m here for you, always. I’ll be your biggest supporter, your shoulder to cry on, and your partner in all the adventures life throws our way.  
+
+Here’s to giggles, blushes, late night chats, long calls, silly arguments, and endless memories with you 💗
+
+Happyyy Birthday again my one & only.
+
+Love you always,
+— Dev 💖
+    `;
+
+    let i = 0;
+    function typeWriter() {
+      if (i < messageText.length) {
+        document.getElementById("message").innerHTML += messageText.charAt(i);
+        i++;
+        setTimeout(typeWriter, 30);
+      }
+    }
+
+    window.onload = () => {
+      music.play().catch(() => {
+        document.body.addEventListener('click', () => {
+          music.play();
+        }, { once: true });
+      });
+      typeWriter();
+      generateHearts();
+    };
+
+    function showSurprise() {
+      launchConfetti();
+    }
+
+    function generateHearts() {
+      setInterval(() => {
+        const heart = document.createElement("div");
+        heart.className = "heart";
+        heart.style.left = Math.random() * 100 + "vw";
+        document.body.appendChild(heart);
+        setTimeout(() => heart.remove(), 4000);
+      }, 300);
+    }
+
+    // Confetti
+    const confettiCanvas = document.getElementById('confetti-canvas');
+    const ctx = confettiCanvas.getContext('2d');
+    confettiCanvas.width = window.innerWidth;
+    confettiCanvas.height = window.innerHeight;
+
+    let confetti = [];
+
+    function launchConfetti() {
+      for (let i = 0; i < 150; i++) {
+        confetti.push({
+          x: Math.random() * confettiCanvas.width,
+          y: Math.random() * confettiCanvas.height - confettiCanvas.height,
+          r: Math.random() * 6 + 2,
+          d: Math.random() * 10 + 5,
+          color: `hsl(${Math.random() * 360}, 100%, 70%)`,
+          tilt: Math.random() * 10 - 10
+        });
+      }
+    }
+
+    function drawConfetti() {
+      ctx.clearRect(0, 0, confettiCanvas.width, confettiCanvas.height);
+      confetti.forEach((p, i) => {
+        ctx.beginPath();
+        ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2, false);
+        ctx.fillStyle = p.color;
+        ctx.fill();
+        p.y += Math.cos(p.d) + 1;
+        p.x += Math.sin(p.d);
+        if (p.y > confettiCanvas.height) confetti.splice(i, 1);
+      });
+      requestAnimationFrame(drawConfetti);
+    }
+
+    drawConfetti();
+  </script>
+</body>
+</html>
